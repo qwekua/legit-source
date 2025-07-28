@@ -145,9 +145,9 @@ function handlePayment() {
     console.log('Selected courses:', selectedCourses);
     console.log('Total amount:', `₵${selectedCourses.length * coursePrice}`);
     
-    // Show payment confirmation
-    courseSelection.style.display = 'none';
-    paymentConfirmation.style.display = 'flex';
+    // // Show payment confirmation
+    // courseSelection.style.display = 'none';
+    // paymentConfirmation.style.display = 'flex';
 }
 
 // Return to courses from confirmation
