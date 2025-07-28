@@ -38,7 +38,7 @@ body {
 .pulse1 {
     animation: pulse 1.5s infinite;
 }
-.pulse1 {width: 200px; margin-left: 30px;}
+.pulse1 {width: 200px; margin-left: 60px;}
 
 @keyframes pulse {
     0% { transform: scale(1); }
