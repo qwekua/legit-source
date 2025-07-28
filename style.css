@@ -126,6 +126,14 @@ body {
     border-top: 1px solid #eee;
     margin-top: 1rem;
 }
+ 
+.btn_l{
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
 
 .total-section p {
     font-weight: bold;
