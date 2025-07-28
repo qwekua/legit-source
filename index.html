@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Legit Source - WAEC Course PDFs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Splash Loader -->
+    <div class="splash-loader" id="splashLoader">
+        <img src="waecc.png" alt="WAEC Logo" class="pulse">
+    </div>
+
+    <!-- Login/Registration Form -->
+    <div class="form-container" id="loginForm">
+        <h1>Your Legit Source</h1>
+        <h2>Create Account</h2>
+        <form id="registrationForm">
+            <div class="form-group">
+                <input type="text" id="fullName" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="indexNumber" placeholder="Index Number" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <button type="submit" class="btn">Register</button>
+        </form>
+    </div>
+
+    <!-- Course Selection -->
+    <div class="course-container" id="courseSelection">
+        <h1>Select Your Courses (₵500 each)</h1>
+        <div class="course-list" id="courseList"></div>
+        <div class="total-section">
+            <p>Total: <span id="totalPrice">₵0</span></p>
+            <button class="btn" id="makePaymentBtn">Make Payment</button>
+        </div>
+    </div>
+    
+
+    <!-- Payment Confirmation -->
+    <div class="confirmation" id="paymentConfirmation">
+        <div class="confirmation-box">
+            <div class="checkmark">✓</div>
+            <h2>Payment Successful</h2>
+            <p>Your selected course PDFs will be sent to your email shortly.</p>
+            <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
