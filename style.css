@@ -35,6 +35,10 @@ body {
 .pulse {
     animation: pulse 1.5s infinite;
 }
+.pulse1 {
+    animation: pulse 1.5s infinite;
+}
+.pulse1 {width: 200px;}
 
 @keyframes pulse {
     0% { transform: scale(1); }
