@@ -205,6 +205,7 @@ body::before {
         margin: 1rem;
         padding: 1.5rem;
     }
+    .pulse1 {width: 200px; margin-left: 60px;}
     
     .splash-loader img {
         width: 150px;
