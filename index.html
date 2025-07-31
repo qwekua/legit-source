@@ -92,5 +92,20 @@
     </div>
 
     <script src="script.js"></script>
+<script>
+document.getElementById("paymentProofForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Simulate upload processing (you can replace this with real upload logic)
+    setTimeout(() => {
+        // Hide form
+        document.getElementById("paymentProofForm").style.display = "none";
+
+        // Show success message
+        document.getElementById("uploadSuccess").style.display = "block";
+    }, 800); // Simulated delay
+});
+</script>
+
 </body>
 </html>
