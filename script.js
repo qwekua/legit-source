@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const splashLoader = document.getElementById('splashLoader');
     const loginForm = document.getElementById('loginForm');
     const courseSelection = document.getElementById('courseSelection');
+    const momoSection = document.getElementById('momoSection');
     const paymentConfirmation = document.getElementById('paymentConfirmation');
     const registrationForm = document.getElementById('registrationForm');
     const courseList = document.getElementById('courseList');
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let selectedCourses = [];
     const coursePrice = 250;
+    let momoShown = false;
 
     // Hide splash screen after 2 seconds, show login
     setTimeout(() => {
@@ -53,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         loginForm.style.display = 'block';
     }, 2000);
 
-    // Render course checkboxes
+    // Render course checkboxes dynamically
     courses.forEach(course => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -80,14 +82,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Handle registration form submit
+    // Registration submit: go to course selection
     registrationForm.addEventListener('submit', function (e) {
         e.preventDefault();
         loginForm.style.display = 'none';
         courseSelection.style.display = 'block';
     });
 
-    // Handle make payment click
+    // Make Payment button logic
     if (makePaymentBtn) {
         makePaymentBtn.addEventListener('click', () => {
             if (selectedCourses.length === 0) {
@@ -95,12 +97,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            if (!paymentScreenshot.files[0]) {
-                alert("Please upload your payment screenshot.");
+            if (!momoShown) {
+                momoSection.style.display = 'block';
+                momoShown = true;
+                window.scrollTo({ top: momoSection.offsetTop, behavior: 'smooth' });
                 return;
             }
 
-            // Simulate upload success
+            if (!paymentScreenshot.files[0]) {
+                alert("Please upload a screenshot of your MoMo payment.");
+                return;
+            }
+
+            // Simulate success
             courseSelection.style.display = 'none';
             paymentConfirmation.style.display = 'block';
         });
