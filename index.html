@@ -41,14 +41,33 @@
     </div>
 
     <!-- Course Selection -->
-    <div class="course-container" id="courseSelection">
-        <h1>Select Your Courses (₵500 each)</h1>
-        <div class="course-list" id="courseList"></div>
-        <div class="total-section">
-            <p>Total: <span id="totalPrice">₵0</span></p>
-            <button class="btn" id="makePaymentBtn"><a href="https://eversend.me/qweku" class="btn_l">Make Payment with Eversend</a></button>
+<div class="course-container" id="courseSelection">
+    <h1>Select Your Courses (₵500 each)</h1>
+    <div class="course-list" id="courseList"></div>
+
+    <div class="total-section">
+        <p>Total: <span id="totalPrice">₵0</span></p>
+        
+        <!-- MoMo Payment Info -->
+        <div class="payment-info">
+            <h3>Pay via Mobile Money</h3>
+            <p><strong>Name:</strong> Alfred Johnson</p>
+            <p><strong>MoMo Number:</strong> +233501234567</p>
+            <p><strong>NB: USE Your indec number as reference</strong> 
+             After payment, upload a screenshot of your transaction below.</p>
         </div>
+
+        <!-- Upload Screenshot -->
+        <form id="paymentProofForm">
+            <div class="form-group">
+                <label for="paymentScreenshot">Upload Screenshot</label>
+                <input type="file" id="paymentScreenshot" accept="image/*" required>
+            </div>
+            <button type="submit" class="btn">Submit Payment Proof</button>
+        </form>
     </div>
+</div>
+
     
 
     <!-- Payment Confirmation -->
