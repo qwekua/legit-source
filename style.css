@@ -144,6 +144,34 @@ body {
     font-size: 18px;
 }
 
+
+
+.payment-info {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.payment-info h3 {
+    margin-top: 0;
+}
+
+form#paymentProofForm {
+    margin-top: 15px;
+}
+
+form#paymentProofForm .form-group {
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%;
+    border-radius: 5px;
+}
+
 /* Payment Confirmation */
 .confirmation {
     position: fixed;
