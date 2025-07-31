@@ -31,7 +31,6 @@ const courses = [
     "Economics"
 ];
 
-// Run after DOM is fully loaded
 document.addEventListener('DOMContentLoaded', function () {
     // DOM Elements
     const splashLoader = document.getElementById('splashLoader');
@@ -43,19 +42,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalPriceElement = document.getElementById('totalPrice');
     const makePaymentBtn = document.getElementById('makePaymentBtn');
     const returnToCoursesBtn = document.getElementById('returnToCoursesBtn');
-    const paymentProofForm = document.getElementById('paymentProofForm');
+    const paymentScreenshot = document.getElementById('paymentScreenshot');
 
     let selectedCourses = [];
-    const coursePrice = 500;
+    const coursePrice = 250;
 
     // Hide splash screen after 2 seconds, show login
     setTimeout(() => {
         splashLoader.style.display = 'none';
         loginForm.style.display = 'block';
     }, 2000);
-
-    // Dummy course list
-    const courses = ['English', 'Math', 'Science', 'ICT', 'Social Studies'];
 
     // Render course checkboxes
     courses.forEach(course => {
@@ -98,16 +94,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert("Please select at least one course before proceeding.");
                 return;
             }
-            courseSelection.style.display = 'none';
-            paymentProofForm.style.display = 'block';
-        });
-    }
 
-    // Handle payment proof submit
-    if (paymentProofForm) {
-        paymentProofForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            paymentProofForm.style.display = 'none';
+            if (!paymentScreenshot.files[0]) {
+                alert("Please upload your payment screenshot.");
+                return;
+            }
+
+            // Simulate upload success
+            courseSelection.style.display = 'none';
             paymentConfirmation.style.display = 'block';
         });
     }
@@ -120,4 +114,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
