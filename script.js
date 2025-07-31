@@ -31,140 +31,113 @@ const courses = [
     "Economics"
 ];
 
-// DOM Elements
-const splashLoader = document.getElementById('splashLoader');
-const loginForm = document.getElementById('loginForm');
-const courseSelection = document.getElementById('courseSelection');
-const paymentConfirmation = document.getElementById('paymentConfirmation');
-const registrationForm = document.getElementById('registrationForm');
-const courseList = document.getElementById('courseList');
-const totalPriceElement = document.getElementById('totalPrice');
-const makePaymentBtn = document.getElementById('makePaymentBtn');
-const returnToCoursesBtn = document.getElementById('returnToCoursesBtn');
+// Run after DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function () {
+    // DOM Elements
+    const splashLoader = document.getElementById('splashLoader');
+    const loginForm = document.getElementById('loginForm');
+    const courseSelection = document.getElementById('courseSelection');
+    const paymentConfirmation = document.getElementById('paymentConfirmation');
+    const registrationForm = document.getElementById('registrationForm');
+    const courseList = document.getElementById('courseList');
+    const totalPriceElement = document.getElementById('totalPrice');
+    const makePaymentBtn = document.getElementById('makePaymentBtn');
+    const returnToCoursesBtn = document.getElementById('returnToCoursesBtn');
+    const paymentProofForm = document.getElementById('paymentProofForm');
 
-// Variables
-let selectedCourses = [];
-const coursePrice = 500;
+    let selectedCourses = [];
+    const coursePrice = 500;
 
-// Initialize the page
-function init() {
     // Hide all sections except splash loader
     loginForm.style.display = 'none';
     courseSelection.style.display = 'none';
     paymentConfirmation.style.display = 'none';
-    
-    // Show splash loader for 2 seconds
+
+    // Splash delay
     setTimeout(() => {
         splashLoader.style.opacity = '0';
         setTimeout(() => {
             splashLoader.style.display = 'none';
-            showLoginForm();
+            loginForm.style.display = 'block';
         }, 500);
     }, 2000);
-    
+
     // Populate course list
-    populateCourseList();
-    
-    // Event listeners
-    registrationForm.addEventListener('submit', handleRegistration);
-    makePaymentBtn.addEventListener('click', handlePayment);
-    returnToCoursesBtn.addEventListener('click', returnToCourses);
-}
+    function populateCourseList() {
+        courseList.innerHTML = '';
 
-// Show login form
-function showLoginForm() {
-    loginForm.style.display = 'block';
-}
+        courses.forEach(course => {
+            const courseItem = document.createElement('div');
+            courseItem.className = 'course-item';
 
-// Handle registration form submission
-function handleRegistration(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const fullName = document.getElementById('fullName').value;
-    const indexNumber = document.getElementById('indexNumber').value;
-    const phoneNumber = document.getElementById('phoneNumber').value;
-    const email = document.getElementById('email').value;
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = course.replace(/\s+/g, '-').toLowerCase();
+            checkbox.value = course;
+            checkbox.addEventListener('change', updateTotal);
 
-    const password = document.getElementById('password').value;
-    
-    // In a real app, you would validate and send to server here
-    console.log('Registration data:', { fullName, indexNumber, phoneNumber, email, password });
-    
-    // Hide login form and show course selection
-    loginForm.style.display = 'none';
-    courseSelection.style.display = 'block';
-}
+            const label = document.createElement('label');
+            label.htmlFor = checkbox.id;
+            label.textContent = course;
 
-// Populate course list
-function populateCourseList() {
-    courseList.innerHTML = '';
-    
-    courses.forEach(course => {
-        const courseItem = document.createElement('div');
-        courseItem.className = 'course-item';
-        
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = course.replace(/\s+/g, '-').toLowerCase();
-        checkbox.value = course;
-        checkbox.addEventListener('change', updateTotal);
-        
-        const label = document.createElement('label');
-        label.htmlFor = checkbox.id;
-        label.textContent = course;
-        
-        courseItem.appendChild(checkbox);
-        courseItem.appendChild(label);
-        courseList.appendChild(courseItem);
-    });
-}
-
-
-// Update total price
-function updateTotal() {
-    selectedCourses = [];
-    const checkboxes = document.querySelectorAll('.course-item input[type="checkbox"]:checked');
-    
-    checkboxes.forEach(checkbox => {
-        selectedCourses.push(checkbox.value);
-    });
-    
-    const total = selectedCourses.length * coursePrice;
-    totalPriceElement.textContent = `₵${total}`;
-}
-
-document.getElementById('paymentProofForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    
-    const fileInput = document.getElementById('paymentScreenshot');
-    if (fileInput.files.length === 0) {
-        alert('Please upload a screenshot of your MoMo transaction.');
-        return;
+            courseItem.appendChild(checkbox);
+            courseItem.appendChild(label);
+            courseList.appendChild(courseItem);
+        });
     }
 
-    // For now, just simulate submission
-    alert('Payment proof submitted. We will verify and email your course PDFs shortly.');
+    function updateTotal() {
+        selectedCourses = [];
+        const checkboxes = document.querySelectorAll('.course-item input[type="checkbox"]:checked');
 
-    // Optionally show confirmation screen
-    document.getElementById('courseSelection').style.display = 'none';
-    document.getElementById('paymentConfirmation').style.display = 'block';
-);
-}
+        checkboxes.forEach(checkbox => {
+            selectedCourses.push(checkbox.value);
+        });
 
+        const total = selectedCourses.length * coursePrice;
+        totalPriceElement.textContent = `₵${total}`;
+    }
 
-// Return to courses from confirmation
-function returnToCourses() {
-    paymentConfirmation.style.display = 'none';
-    courseSelection.style.display = 'block';
-    
-    // Clear selections
-    document.querySelectorAll('.course-item input[type="checkbox"]').forEach(checkbox => {
-        checkbox.checked = false;
+    registrationForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById('fullName').value;
+        const indexNumber = document.getElementById('indexNumber').value;
+        const phoneNumber = document.getElementById('phoneNumber').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        console.log('Registration:', { fullName, indexNumber, phoneNumber, email, password });
+
+        loginForm.style.display = 'none';
+        courseSelection.style.display = 'block';
     });
-    selectedCourses = [];
-    totalPriceElement.textContent = '₵0';
-}
 
-// Initialize the app
-init();
+    paymentProofForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const fileInput = document.getElementById('paymentScreenshot');
+        if (fileInput.files.length === 0) {
+            alert('Please upload a screenshot of your MoMo transaction.');
+            return;
+        }
+
+        alert('Payment proof submitted. We will verify and email your course PDFs shortly.');
+
+        courseSelection.style.display = 'none';
+        paymentConfirmation.style.display = 'block';
+    });
+
+    if (returnToCoursesBtn) {
+        returnToCoursesBtn.addEventListener('click', function () {
+            paymentConfirmation.style.display = 'none';
+            courseSelection.style.display = 'block';
+
+            document.querySelectorAll('.course-item input[type="checkbox"]').forEach(cb => cb.checked = false);
+            selectedCourses = [];
+            totalPriceElement.textContent = '₵0';
+        });
+    }
+
+    populateCourseList();
+});
