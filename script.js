@@ -10,19 +10,36 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const courseData = [
-      "English Language",
-      "Mathematics (Core)",
-      "Integrated Science",
-      "Social Studies",
-      "Biology",
-      "Chemistry",
-      "Physics",
-      "Elective Maths",
-      "Economics",
-      "Geography",
-      "Government",
-      "Business Management",
-      "Accounting"
+      "Clothing and Textiles",
+    "Food & Nutrition Plan",
+    "GKA 1&2",
+    "English Orals and English Language",
+    "ICT Practicals",
+    "Food and Nutrition",
+    "Social Studies",
+    "Financial Accounting",
+    "Physics Alt A, B & C",
+    "Management in Living",
+    "Cost Accounting",
+    "History",
+    "Literature 1&2",
+    "Government",
+    "Core Maths",
+    "Elective Maths",
+    "French",
+    "Chemistry Alt A, B & C",
+    "Ewe/Twi/Fante",
+    "Music",
+    "Chemistry",
+    "Geography 1, 2 & 3",
+    "Business Management",
+    "Physics",
+    "CRS/IRS",
+    "Biology Alt A, B & C",
+    "Integrated Science",
+    "ICT 1&2",
+    "Economics"
+
     ];
 
     const courseList = document.getElementById("courseList");
