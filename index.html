@@ -9,7 +9,7 @@
 <body>
     <!-- Splash Loader -->
     <div class="splash-loader" id="splashLoader">
-        <img src="wassce logo" alt="Wassce Logo" class="pulse">
+        <img src="wassce-logo.png" alt="WASSCE Logo" class="pulse">
     </div>
 
     <!-- Login/Registration Form -->
@@ -39,22 +39,41 @@
     <!-- Course Selection -->
     <div class="course-container" id="courseSelection">
         <h1>Select Your Courses (₵250 each)</h1>
-        <div class="course-list" id="courseList"></div>
+        <div class="course-list" id="courseList">
+            <!-- Example subjects -->
+            <label><input type="checkbox" class="course" value="250"> Core Mathematics</label><br>
+            <label><input type="checkbox" class="course" value="250"> English Language</label><br>
+            <label><input type="checkbox" class="course" value="250"> Integrated Science</label><br>
+            <label><input type="checkbox" class="course" value="250"> Social Studies</label><br>
+        </div>
+
         <div class="total-section">
             <p>Total: <span id="totalPrice">₵0</span></p>
             <button class="btn" id="makePaymentBtn">Make Payment</button>
         </div>
 
         <!-- Mobile Money Payment Section -->
-        <div class="momo-payment-section">
-            <h2>Send Payment via MoMo</h2>
-            <p><strong>Send ₵250 per subject</strong> to the details below:</p>
+        <div class="momo-payment-section" id="momoSection" style="display: none;">
+            <h2>MoMo Payment Instructions</h2>
+            <p><strong>Send ₵250 per subject</strong> to the MoMo account below:</p>
             <ul>
                 <li><strong>Account Name:</strong> Your Legit Source</li>
                 <li><strong>MoMo Number:</strong> 0551234567</li>
                 <li><strong>Network:</strong> MTN Ghana</li>
             </ul>
-            <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference for the payment.</p>
+
+            <h3>Steps to Pay via MoMo in Ghana:</h3>
+            <ol>
+                <li>Dial <strong>*170#</strong> on your phone.</li>
+                <li>Select option <strong>1 - Transfer Money</strong>.</li>
+                <li>Select <strong>1 - MTN MoMo</strong>.</li>
+                <li>Enter this number: <strong>0551234567</strong>.</li>
+                <li>Enter amount based on number of subjects (₵250 x subjects).</li>
+                <li>Reference: <strong>Use your Index Number</strong>.</li>
+                <li>Confirm with MoMo PIN to complete the payment.</li>
+            </ol>
+
+            <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference during payment.</p>
 
             <label for="paymentScreenshot">Upload Screenshot of Payment:</label>
             <input type="file" id="paymentScreenshot" accept="image/*" required>
@@ -62,15 +81,40 @@
     </div>
 
     <!-- Payment Confirmation -->
-    <div class="confirmation" id="paymentConfirmation">
+    <div class="confirmation" id="paymentConfirmation" style="display: none;">
         <div class="confirmation-box">
             <div class="checkmark">✓</div>
-            <h2>Payment Successful</h2>
-            <p>Your selected course PDFs will be sent to your email shortly.</p>
+            <h2>Payment Submitted</h2>
+            <p>We will verify your payment. Your course PDFs will be sent to your email shortly.</p>
             <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        // Update total
+        const courses = document.querySelectorAll('.course');
+        const totalPriceEl = document.getElementById('totalPrice');
+        const makePaymentBtn = document.getElementById('makePaymentBtn');
+        const momoSection = document.getElementById('momoSection');
+
+        courses.forEach(course => {
+            course.addEventListener('change', () => {
+                let total = 0;
+                courses.forEach(c => {
+                    if (c.checked) total += parseInt(c.value);
+                });
+                totalPriceEl.textContent = `₵${total}`;
+            });
+        });
+
+        makePaymentBtn.addEventListener('click', () => {
+            momoSection.style.display = 'block';
+        });
+
+        // Example: handle screenshot upload
+        document.getElementById('paymentScreenshot').addEventListener('change', () => {
+            document.getElementById('paymentConfirmation').style.display = 'block';
+        });
+    </script>
 </body>
 </html>
