@@ -141,6 +141,17 @@
     }, 500); // match transition duration
   });
 </script>
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function (e) {
+        e.preventDefault(); // Prevent form from reloading page
+
+        // Hide the registration form container
+        document.getElementById("loginForm").style.display = "none";
+
+        // Show the course selection container
+        document.getElementById("courseSelection").style.display = "block";
+    });
+</script>
 
 </body>
 </html>
