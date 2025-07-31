@@ -1,125 +1,76 @@
-// Courses data
-const courses = [
-    "Clothing and Textiles",
-    "Food & Nutrition Plan",
-    "GKA 1&2",
-    "English Orals and English Language",
-    "ICT Practicals",
-    "Food and Nutrition",
-    "Social Studies",
-    "Financial Accounting",
-    "Physics Alt A, B & C",
-    "Management in Living",
-    "Cost Accounting",
-    "History",
-    "Literature 1&2",
-    "Government",
-    "Core Maths",
-    "Elective Maths",
-    "French",
-    "Chemistry Alt A, B & C",
-    "Ewe/Twi/Fante",
-    "Music",
-    "Chemistry",
-    "Geography 1, 2 & 3",
-    "Business Management",
-    "Physics",
-    "CRS/IRS",
-    "Biology Alt A, B & C",
-    "Integrated Science",
-    "ICT 1&2",
-    "Economics"
-];
-
-document.addEventListener('DOMContentLoaded', function () {
-    // DOM Elements
-    const splashLoader = document.getElementById('splashLoader');
-    const loginForm = document.getElementById('loginForm');
-    const courseSelection = document.getElementById('courseSelection');
-    const momoSection = document.getElementById('momoSection');
-    const paymentConfirmation = document.getElementById('paymentConfirmation');
-    const registrationForm = document.getElementById('registrationForm');
-    const courseList = document.getElementById('courseList');
-    const totalPriceElement = document.getElementById('totalPrice');
-    const makePaymentBtn = document.getElementById('makePaymentBtn');
-    const returnToCoursesBtn = document.getElementById('returnToCoursesBtn');
-    const paymentScreenshot = document.getElementById('paymentScreenshot');
-
-    let selectedCourses = [];
-    const coursePrice = 250;
-    let momoShown = false;
-
-    // Hide splash screen after 2 seconds, show login
+<script>
+  window.addEventListener("load", function () {
+    const splash = document.getElementById("splashLoader");
+    splash.style.opacity = 0;
     setTimeout(() => {
-        splashLoader.style.display = 'none';
-        loginForm.style.display = 'block';
-    }, 2000);
+      splash.style.display = "none";
+      document.querySelector(".form-container").style.display = "block";
+    }, 500);
+  });
 
-    // Render course checkboxes dynamically
-    courses.forEach(course => {
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.value = course;
-        checkbox.id = course;
+  document.addEventListener("DOMContentLoaded", () => {
+    const courseData = [
+      "English Language",
+      "Mathematics (Core)",
+      "Integrated Science",
+      "Social Studies",
+      "Biology",
+      "Chemistry",
+      "Physics",
+      "Elective Maths",
+      "Economics",
+      "Geography",
+      "Government",
+      "Business Management",
+      "Accounting"
+    ];
 
-        const label = document.createElement('label');
-        label.htmlFor = course;
-        label.textContent = course;
+    const courseList = document.getElementById("courseList");
+    const totalPriceEl = document.getElementById("totalPrice");
+    const makePaymentBtn = document.getElementById("makePaymentBtn");
+    const momoSection = document.getElementById("momoSection");
+    const paymentConfirmation = document.getElementById("paymentConfirmation");
 
-        const container = document.createElement('div');
-        container.appendChild(checkbox);
-        container.appendChild(label);
+    // Populate course list
+    courseData.forEach(course => {
+      const label = document.createElement("label");
+      label.className = "course-item";
 
-        courseList.appendChild(container);
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "course";
+      checkbox.value = 250;
 
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                selectedCourses.push(course);
-            } else {
-                selectedCourses = selectedCourses.filter(c => c !== course);
-            }
-            totalPriceElement.textContent = `₵${selectedCourses.length * coursePrice}`;
-        });
+      checkbox.addEventListener("change", updateTotal);
+      label.appendChild(checkbox);
+      label.append(` ${course}`);
+      courseList.appendChild(label);
     });
 
-    // Registration submit: go to course selection
-    registrationForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        loginForm.style.display = 'none';
-        courseSelection.style.display = 'block';
+    function updateTotal() {
+      const selected = document.querySelectorAll(".course:checked");
+      const total = Array.from(selected).reduce((sum, box) => sum + parseInt(box.value), 0);
+      totalPriceEl.textContent = `₵${total}`;
+    }
+
+    // Handle registration form
+    document.getElementById("registrationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("courseSelection").style.display = "block";
     });
 
-    // Make Payment button logic
-    if (makePaymentBtn) {
-        makePaymentBtn.addEventListener('click', () => {
-            if (selectedCourses.length === 0) {
-                alert("Please select at least one course before proceeding.");
-                return;
-            }
+    makePaymentBtn.addEventListener("click", () => {
+      momoSection.style.display = "block";
+    });
 
-            if (!momoShown) {
-                momoSection.style.display = 'block';
-                momoShown = true;
-                window.scrollTo({ top: momoSection.offsetTop, behavior: 'smooth' });
-                return;
-            }
+    document.getElementById("paymentScreenshot").addEventListener("change", () => {
+      paymentConfirmation.style.display = "block";
+    });
 
-            if (!paymentScreenshot.files[0]) {
-                alert("Please upload a screenshot of your MoMo payment.");
-                return;
-            }
-
-            // Simulate success
-            courseSelection.style.display = 'none';
-            paymentConfirmation.style.display = 'block';
-        });
-    }
-
-    // Return to course selection
-    if (returnToCoursesBtn) {
-        returnToCoursesBtn.addEventListener('click', () => {
-            paymentConfirmation.style.display = 'none';
-            courseSelection.style.display = 'block';
-        });
-    }
-});
+    document.getElementById("returnToCoursesBtn").addEventListener("click", () => {
+      paymentConfirmation.style.display = "none";
+      momoSection.style.display = "none";
+    });
+  });
+</script>
