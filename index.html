@@ -9,16 +9,12 @@
 <body>
     <!-- Splash Loader -->
     <div class="splash-loader" id="splashLoader">
-        <img src="wassce logo.png" alt="wassce Logo" class="pulse">
+        <img src="waecc.png" alt="WAEC Logo" class="pulse">
     </div>
 
     <!-- Login/Registration Form -->
     <div class="form-container" id="loginForm">
-          <img src="wassce logo.png" alt="wassce Logo" class="pulse1">
         <h1>Your Legit Source</h1>
-         <strong>Note: Keep this to yourself; no sharing of PDFs to others 
-        If you do so; you do it at your own risk
-        all pdfs will be shared into your email provided shortly after payment Confirmation</strong>
         <h2>Create Account</h2>
         <form id="registrationForm">
             <div class="form-group">
@@ -41,44 +37,14 @@
     </div>
 
     <!-- Course Selection -->
-<div class="course-container" id="courseSelection">
-    <h1>Select Your Courses (₵500 each)</h1>
-    <div class="course-list" id="courseList"></div>
-
-    <div class="total-section">
-        <p>Total: <span id="totalPrice">₵0</span></p>
-        
-        <!-- MoMo Payment Info -->
-        <div class="payment-info">
-            <h3>Pay via Mobile Money</h3>
-            <p><strong>Name:</strong> Alfred Johnson</p>
-            <p><strong>MoMo Number:</strong> +233501234567</p>
-            <p><strong>NB: USE Your indec number as reference</strong> 
-             After payment, upload a screenshot of your transaction below.</p>
+    <div class="course-container" id="courseSelection">
+        <h1>Select Your Courses (₵500 each)</h1>
+        <div class="course-list" id="courseList"></div>
+        <div class="total-section">
+            <p>Total: <span id="totalPrice">₵0</span></p>
+            <button class="btn" id="makePaymentBtn">Make Payment</button>
         </div>
-
-        <!-- Upload Screenshot -->
-<form id="paymentProofForm">
-  <h2>Upload Payment Screenshot</h2>
-  <div class="form-group">
-    <label for="paymentScreenshot">Choose Image File (JPEG or PNG):</label>
-    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/png, image/jpeg" required>
-  </div>
-  <div class="form-group">
-    <button type="submit" class="btn">Submit Proof</button>
-  </div>
-</form>
-
-<div id="uploadSuccess" class="upload-success-message">
-    <div class="checkmark">✅</div>
-    <h3>Upload Successful!</h3>
-    <p>Your payment screenshot has been received.</p>
-</div>
-
-
     </div>
-</div>
-
     
 
     <!-- Payment Confirmation -->
@@ -92,20 +58,5 @@
     </div>
 
     <script src="script.js"></script>
-<script>
-document.getElementById("paymentProofForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    // Simulate upload processing (you can replace this with real upload logic)
-    setTimeout(() => {
-        // Hide form
-        document.getElementById("paymentProofForm").style.display = "none";
-
-        // Show success message
-        document.getElementById("uploadSuccess").style.display = "block";
-    }, 800); // Simulated delay
-});
-</script>
-
 </body>
 </html>
