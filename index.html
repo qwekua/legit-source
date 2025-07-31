@@ -1,154 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>WASSCE Portal</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-
-    .splash-loader {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-
-    .pulse {
-      animation: pulse 1.5s infinite;
-      width: 150px;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    .form-container, #courseSelection, #momoSection, #paymentConfirmation {
-      display: none;
-      padding: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    input[type="text"],
-    input[type="tel"],
-    input[type="email"],
-    input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ddd;
-    }
-
-    .btn {
-      background-color: #007bff;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .course-list {
-      max-height: 300px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-      padding: 10px;
-      background: white;
-      border: 1px solid #ccc;
-    }
-
-    .course-item {
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .total-section {
-      background: #fff;
-      padding: 10px;
-      border-top: 1px solid #ddd;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Legit Source - WAEC Course PDFs</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-<!-- Splash Loader -->
-<div class="splash-loader" id="splashLoader">
-  <img src="wassce logo.png" alt="WASSCE Logo" class="pulse">
-</div>
-
-<!-- Login/Registration Form -->
-<div class="form-container" id="loginForm">
-  <img src="wassce logo.png" alt="wassce Logo" style="width: 100px;"><br>
-  <h1>Your Legit Source</h1>
-  <strong>Note: Keep this to yourself; no sharing of PDFs. All PDFs will be shared to your email shortly after payment confirmation.</strong>
-
-  <h2>Create Account</h2>
-  <form id="registrationForm">
-    <div class="form-group"><input type="text" id="fullName" placeholder="Full Name" required></div>
-    <div class="form-group"><input type="text" id="indexNumber" placeholder="Index Number" required></div>
-    <div class="form-group"><input type="tel" id="phoneNumber" placeholder="Phone Number" required></div>
-    <div class="form-group"><input type="email" id="email" placeholder="Email Address" required></div>
-    <div class="form-group"><input type="password" id="password" placeholder="Password" required></div>
-    <button type="submit" class="btn">Register</button>
-  </form>
-</div>
-
-<!-- Course Selection -->
-<div class="form-container" id="courseSelection">
-  <h1>Select Your Courses (₵250 each)</h1>
-  <div class="course-list" id="courseList"></div>
-
-  <div class="total-section">
-    <p>Total: <span id="totalPrice">₵0</span></p>
-    <button class="btn" id="makePaymentBtn">Make Payment</button>
+  <!-- Splash Loader -->
+  <div class="splash-loader" id="splashLoader">
+    <img src="wassce logo.png" alt="WASSCE Logo" class="pulse" />
   </div>
-</div>
 
-<!-- MoMo Upload Section -->
-<div class="form-container" id="momoSection">
-  <h2>Upload MoMo Screenshot</h2>
-  <input type="file" id="paymentScreenshot" accept="image/*" required>
-</div>
+  <!-- Login/Registration Form -->
+  <div class="form-container" id="loginForm">
+    <h1>Your Legit Source</h1>
+    <h2>Create Account</h2>
+    <form id="registrationForm">
+      <div class="form-group">
+        <input type="text" id="fullName" placeholder="Full Name" required />
+      </div>
+      <div class="form-group">
+        <input type="text" id="indexNumber" placeholder="Index Number" required />
+      </div>
+      <div class="form-group">
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
 
-<!-- Payment Confirmation -->
-<div class="form-container" id="paymentConfirmation">
-  <h2>Payment Received</h2>
-  <p>We will confirm and send the PDFs to your email shortly.</p>
-  <button class="btn" id="returnToCoursesBtn">Back</button>
-</div>
+  <!-- Course Selection Section -->
+  <div class="course-container" id="courseSelection" style="display: none;">
+    <h1>Select Your Courses (₵250 each)</h1>
+    <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px;"></div>
 
-<script>
-  window.addEventListener("load", function () {
-    const splash = document.getElementById("splashLoader");
-    splash.style.opacity = 0;
-    setTimeout(() => {
-      splash.style.display = "none";
-      document.querySelector(".form-container").style.display = "block";
-    }, 500);
-  });
+    <div class="total-section">
+      <p>Total: <span id="totalPrice">₵0</span></p>
+      <button class="btn" id="makePaymentBtn">Make Payment</button>
+    </div>
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const courses = [
-      "Clothing and Textiles", "Food & Nutrition Plan", "GKA 1&2", "English Orals and English Language",
-      "ICT Practicals", "Food and Nutrition", "Social Studies", "Financial Accounting",
-      "Physics Alt A, B & C", "Management in Living", "Cost Accounting", "History", "Literature 1&2",
-      "Government", "Core Maths", "Elective Maths", "French", "Chemistry Alt A, B & C",
-      "Ewe/Twi/Fante", "Music", "Chemistry", "Geography 1, 2 & 3", "Business Management", "Physics",
-      "CRS/IRS", "Biology Alt A, B & C", "Integrated Science", "ICT 1&2", "Economics"
+    <!-- Mobile Money Payment Section -->
+    <div class="momo-payment-section" id="momoSection" style="display: none;">
+      <h2>MoMo Payment Instructions</h2>
+      <p><strong>Send ₵250 per subject</strong> to the MoMo account below:</p>
+      <ul>
+        <li><strong>Account Name:</strong> Your Legit Source</li>
+        <li><strong>MoMo Number:</strong> 0551234567</li>
+        <li><strong>Network:</strong> MTN Ghana</li>
+      </ul>
+
+      <h3>Steps to Pay via MoMo in Ghana:</h3>
+      <ol>
+        <li>Dial <strong>*170#</strong> on your phone.</li>
+        <li>Select option <strong>1 - Transfer Money</strong>.</li>
+        <li>Select <strong>1 - MTN MoMo</strong>.</li>
+        <li>Enter this number: <strong>0551234567</strong>.</li>
+        <li>Enter amount based on number of subjects (₵250 x subjects).</li>
+        <li>Reference: <strong>Use your Index Number</strong>.</li>
+        <li>Confirm with MoMo PIN to complete the payment.</li>
+      </ol>
+
+      <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference during payment.</p>
+
+      <label for="paymentScreenshot">Upload Screenshot of Payment:</label>
+      <input type="file" id="paymentScreenshot" accept="image/*" required />
+    </div>
+  </div>
+
+  <!-- Payment Confirmation -->
+  <div class="confirmation" id="paymentConfirmation" style="display: none;">
+    <div class="confirmation-box">
+      <div class="checkmark">✓</div>
+      <h2>Payment Submitted</h2>
+      <p>We will verify your payment. Your course PDFs will be sent to your email shortly.</p>
+      <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Hide splash after load
+    window.addEventListener("load", function () {
+      const splash = document.getElementById("splashLoader");
+      splash.style.opacity = 0;
+      setTimeout(() => {
+        splash.style.display = "none";
+        document.querySelector(".form-container").style.display = "block";
+      }, 500);
+    });
+
+    // Handle registration form
+    document.getElementById("registrationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("courseSelection").style.display = "block";
+    });
+
+    // Course list
+    const courseData = [
+      "English Language",
+      "Mathematics (Core)",
+      "Integrated Science",
+      "Social Studies",
+      "Biology",
+      "Chemistry",
+      "Physics",
+      "Elective Maths",
+      "Economics",
+      "Geography",
+      "Government",
+      "Business Management",
+      "Accounting"
     ];
 
     const courseList = document.getElementById("courseList");
@@ -157,7 +126,8 @@
     const momoSection = document.getElementById("momoSection");
     const paymentConfirmation = document.getElementById("paymentConfirmation");
 
-    courses.forEach(course => {
+    // Populate course list
+    courseData.forEach(course => {
       const label = document.createElement("label");
       label.className = "course-item";
 
@@ -178,12 +148,6 @@
       totalPriceEl.textContent = `₵${total}`;
     }
 
-    document.getElementById("registrationForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-      document.getElementById("loginForm").style.display = "none";
-      document.getElementById("courseSelection").style.display = "block";
-    });
-
     makePaymentBtn.addEventListener("click", () => {
       momoSection.style.display = "block";
     });
@@ -196,8 +160,6 @@
       paymentConfirmation.style.display = "none";
       momoSection.style.display = "none";
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
