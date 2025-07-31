@@ -40,14 +40,60 @@
 <div class="course-container" id="courseSelection" style="display: none;">
     <h1>Select Your Courses (₵250 each)</h1>
 
-    <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: auto;"></div>
+   
+<script>
+    const courseData = [
+        "English Language",
+        "Mathematics (Core)",
+        "Integrated Science",
+        "Social Studies",
+        "Biology",
+        "Chemistry",
+        "Physics",
+        "Elective Maths",
+        "Economics",
+        "Geography",
+        "Government",
+        "Business Management",
+        "Accounting"
+    ];
 
-    <div class="total-section">
-        <p>Total: <span id="totalPrice">₵0</span></p>
-        <button class="btn" id="makePaymentBtn">Make Payment</button>
-    </div>
-</div>
+    const courseList = document.getElementById("courseList");
+    const totalPriceEl = document.getElementById('totalPrice');
+    const makePaymentBtn = document.getElementById('makePaymentBtn');
+    const momoSection = document.getElementById('momoSection');
 
+    // Render courses dynamically
+    courseData.forEach(course => {
+        const label = document.createElement("label");
+        label.className = "course-item";
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "course";
+        checkbox.value = 250;
+
+        checkbox.addEventListener('change', updateTotal);
+
+        label.appendChild(checkbox);
+        label.append(` ${course}`);
+        courseList.appendChild(label);
+    });
+
+    function updateTotal() {
+        const selected = document.querySelectorAll('.course:checked');
+        const total = Array.from(selected).reduce((sum, box) => sum + parseInt(box.value), 0);
+        totalPriceEl.textContent = `₵${total}`;
+    }
+
+    makePaymentBtn.addEventListener('click', () => {
+        momoSection.style.display = 'block';
+    });
+
+    document.getElementById('paymentScreenshot').addEventListener('change', () => {
+        document.getElementById('paymentConfirmation').style.display = 'block';
+    });
+</script>
 
         <!-- Mobile Money Payment Section -->
         <div class="momo-payment-section" id="momoSection" style="display: none;">
