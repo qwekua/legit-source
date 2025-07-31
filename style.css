@@ -239,3 +239,62 @@ body::before {
         width: 150px;
     }
 }
+
+/* Upload Screenshot / Payment Proof */
+#paymentProofForm {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    display: none;
+}
+
+#paymentProofForm h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 22px;
+    color: #0056b3;
+}
+
+#paymentProofForm .form-group {
+    margin-bottom: 1.5rem;
+}
+
+#paymentProofForm label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+#paymentProofForm input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s ease;
+}
+
+#paymentProofForm input[type="file"]:focus {
+    outline: none;
+    border-color: #0056b3;
+}
+
+#paymentProofForm .btn {
+    padding: 12px;
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#paymentProofForm .btn:hover {
+    background-color: #003d82;
+}
