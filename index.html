@@ -116,5 +116,15 @@
             document.getElementById('paymentConfirmation').style.display = 'block';
         });
     </script>
+     <script>
+    // Hide splash screen after 3 seconds
+    window.addEventListener('load', function () {
+        const splash = document.getElementById('splashLoader');
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 3000); // 3000 milliseconds = 3 seconds
+    });
+</script>
+
 </body>
 </html>
