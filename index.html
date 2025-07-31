@@ -37,16 +37,10 @@
     </div>
 
     <!-- Course Selection -->
-    <div class="course-container" id="courseSelection">
-        <h1>Select Your Courses (₵250 each)</h1>
-        <div class="course-list" id="courseList">
-            <!-- Example subjects -->
-            <label><input type="checkbox" class="course" value="250"> Core Mathematics</label><br>
-            <label><input type="checkbox" class="course" value="250"> English Language</label><br>
-            <label><input type="checkbox" class="course" value="250"> Integrated Science</label><br>
-            <label><input type="checkbox" class="course" value="250"> Social Studies</label><br>
-        </div>
+        <div class="course-list" id="courseList"></div>
+       <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: scroll;"></div>
 
+       
         <div class="total-section">
             <p>Total: <span id="totalPrice">₵0</span></p>
             <button class="btn" id="makePaymentBtn">Make Payment</button>
