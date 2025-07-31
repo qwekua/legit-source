@@ -36,15 +36,18 @@
         </form>
     </div>
 
-    <!-- Course Selection -->
-        <div class="course-list" id="courseList"></div>
-       <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: scroll;"></div>
+<!-- Course Selection Section -->
+<div class="course-container" id="courseSelection" style="display: none;">
+    <h1>Select Your Courses (₵250 each)</h1>
 
-       
-        <div class="total-section">
-            <p>Total: <span id="totalPrice">₵0</span></p>
-            <button class="btn" id="makePaymentBtn">Make Payment</button>
-        </div>
+    <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: auto;"></div>
+
+    <div class="total-section">
+        <p>Total: <span id="totalPrice">₵0</span></p>
+        <button class="btn" id="makePaymentBtn">Make Payment</button>
+    </div>
+</div>
+
 
         <!-- Mobile Money Payment Section -->
         <div class="momo-payment-section" id="momoSection" style="display: none;">
