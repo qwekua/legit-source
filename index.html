@@ -58,13 +58,19 @@
         </div>
 
         <!-- Upload Screenshot -->
-        <form id="paymentProofForm">
-            <div class="form-group">
-                <label for="paymentScreenshot">Upload Screenshot</label>
-                <input type="file" id="paymentScreenshot" accept="image/*" required>
-            </div>
-            <button type="submit" class="btn">Submit Payment Proof</button>
-        </form>
+        <form id="paymentProofForm" style="display: none;" class="payment-form">
+  <h2>Upload Payment Proof</h2>
+
+  <div class="form-group">
+    <label for="paymentScreenshot">Upload Screenshot (PNG/JPEG):</label>
+    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/png, image/jpeg" required>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" class="btn">Submit Proof</button>
+  </div>
+</form>
+
     </div>
 </div>
 
