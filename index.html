@@ -1,200 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Legit Source - WAEC Course PDFs</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Legit Source - WAEC Course PDFs</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <!-- Splash Loader -->
-    <div class="splash-loader" id="splashLoader">
-        <img src="wassce logo.png" alt="WASSCE Logo" class="pulse">
-    </div>
+  <!-- Splash Loader -->
+  <div class="splash-loader" id="splashLoader">
+    <img src="wassce logo.png" alt="WASSCE Logo" class="pulse" />
+  </div>
 
-    <!-- Login/Registration Form -->
-    <div class="form-container" id="loginForm">
-        <h1>Your Legit Source</h1>
-        <h2>Create Account</h2>
-        <form id="registrationForm">
-            <div class="form-group">
-                <input type="text" id="fullName" placeholder="Full Name" required>
-            </div>
-            <div class="form-group">
-                <input type="text" id="indexNumber" placeholder="Index Number" required>
-            </div>
-            <div class="form-group">
-                <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
-            </div>
-            <div class="form-group">
-                <input type="email" id="email" placeholder="Email Address" required>
-            </div>
-            <div class="form-group">
-                <input type="password" id="password" placeholder="Password" required>
-            </div>
-            <button type="submit" class="btn">Register</button>
-        </form>
-    </div>
+  <!-- Login/Registration Form -->
+  <div class="form-container" id="loginForm">
+    <h1>Your Legit Source</h1>
+    <h2>Create Account</h2>
+    <form id="registrationForm">
+      <div class="form-group">
+        <input type="text" id="fullName" placeholder="Full Name" required />
+      </div>
+      <div class="form-group">
+        <input type="text" id="indexNumber" placeholder="Index Number" required />
+      </div>
+      <div class="form-group">
+        <input type="tel" id="phoneNumber" placeholder="Phone Number" required />
+      </div>
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email Address" required />
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" required />
+      </div>
+      <button type="submit" class="btn">Register</button>
+    </form>
+  </div>
 
-<!-- Course Selection Section -->
-<div class="course-container" id="courseSelection" style="display: none;">
+  <!-- Course Selection Section -->
+  <div class="course-container" id="courseSelection" style="display: none;">
     <h1>Select Your Courses (₵250 each)</h1>
+    <div class="course-list" id="courseList" style="max-height: 400px; overflow-y: auto; margin-bottom: 20px;"></div>
 
-   
-<script>
+    <div class="total-section">
+      <p>Total: <span id="totalPrice">₵0</span></p>
+      <button class="btn" id="makePaymentBtn">Make Payment</button>
+    </div>
+
+    <!-- Mobile Money Payment Section -->
+    <div class="momo-payment-section" id="momoSection" style="display: none;">
+      <h2>MoMo Payment Instructions</h2>
+      <p><strong>Send ₵250 per subject</strong> to the MoMo account below:</p>
+      <ul>
+        <li><strong>Account Name:</strong> Your Legit Source</li>
+        <li><strong>MoMo Number:</strong> 0551234567</li>
+        <li><strong>Network:</strong> MTN Ghana</li>
+      </ul>
+
+      <h3>Steps to Pay via MoMo in Ghana:</h3>
+      <ol>
+        <li>Dial <strong>*170#</strong> on your phone.</li>
+        <li>Select option <strong>1 - Transfer Money</strong>.</li>
+        <li>Select <strong>1 - MTN MoMo</strong>.</li>
+        <li>Enter this number: <strong>0551234567</strong>.</li>
+        <li>Enter amount based on number of subjects (₵250 x subjects).</li>
+        <li>Reference: <strong>Use your Index Number</strong>.</li>
+        <li>Confirm with MoMo PIN to complete the payment.</li>
+      </ol>
+
+      <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference during payment.</p>
+
+      <label for="paymentScreenshot">Upload Screenshot of Payment:</label>
+      <input type="file" id="paymentScreenshot" accept="image/*" required />
+    </div>
+  </div>
+
+  <!-- Payment Confirmation -->
+  <div class="confirmation" id="paymentConfirmation" style="display: none;">
+    <div class="confirmation-box">
+      <div class="checkmark">✓</div>
+      <h2>Payment Submitted</h2>
+      <p>We will verify your payment. Your course PDFs will be sent to your email shortly.</p>
+      <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Hide splash after load
+    window.addEventListener("load", function () {
+      const splash = document.getElementById("splashLoader");
+      splash.style.opacity = 0;
+      setTimeout(() => {
+        splash.style.display = "none";
+        document.querySelector(".form-container").style.display = "block";
+      }, 500);
+    });
+
+    // Handle registration form
+    document.getElementById("registrationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("courseSelection").style.display = "block";
+    });
+
+    // Course list
     const courseData = [
-        "English Language",
-        "Mathematics (Core)",
-        "Integrated Science",
-        "Social Studies",
-        "Biology",
-        "Chemistry",
-        "Physics",
-        "Elective Maths",
-        "Economics",
-        "Geography",
-        "Government",
-        "Business Management",
-        "Accounting"
+      "English Language",
+      "Mathematics (Core)",
+      "Integrated Science",
+      "Social Studies",
+      "Biology",
+      "Chemistry",
+      "Physics",
+      "Elective Maths",
+      "Economics",
+      "Geography",
+      "Government",
+      "Business Management",
+      "Accounting"
     ];
 
     const courseList = document.getElementById("courseList");
-    const totalPriceEl = document.getElementById('totalPrice');
-    const makePaymentBtn = document.getElementById('makePaymentBtn');
-    const momoSection = document.getElementById('momoSection');
+    const totalPriceEl = document.getElementById("totalPrice");
+    const makePaymentBtn = document.getElementById("makePaymentBtn");
+    const momoSection = document.getElementById("momoSection");
+    const paymentConfirmation = document.getElementById("paymentConfirmation");
 
-    // Render courses dynamically
+    // Populate course list
     courseData.forEach(course => {
-        const label = document.createElement("label");
-        label.className = "course-item";
+      const label = document.createElement("label");
+      label.className = "course-item";
 
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "course";
-        checkbox.value = 250;
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "course";
+      checkbox.value = 250;
 
-        checkbox.addEventListener('change', updateTotal);
-
-        label.appendChild(checkbox);
-        label.append(` ${course}`);
-        courseList.appendChild(label);
+      checkbox.addEventListener("change", updateTotal);
+      label.appendChild(checkbox);
+      label.append(` ${course}`);
+      courseList.appendChild(label);
     });
 
     function updateTotal() {
-        const selected = document.querySelectorAll('.course:checked');
-        const total = Array.from(selected).reduce((sum, box) => sum + parseInt(box.value), 0);
-        totalPriceEl.textContent = `₵${total}`;
+      const selected = document.querySelectorAll(".course:checked");
+      const total = Array.from(selected).reduce((sum, box) => sum + parseInt(box.value), 0);
+      totalPriceEl.textContent = `₵${total}`;
     }
 
-    makePaymentBtn.addEventListener('click', () => {
-        momoSection.style.display = 'block';
+    makePaymentBtn.addEventListener("click", () => {
+      momoSection.style.display = "block";
     });
 
-    document.getElementById('paymentScreenshot').addEventListener('change', () => {
-        document.getElementById('paymentConfirmation').style.display = 'block';
+    document.getElementById("paymentScreenshot").addEventListener("change", () => {
+      paymentConfirmation.style.display = "block";
     });
-</script>
 
-        <!-- Mobile Money Payment Section -->
-        <div class="momo-payment-section" id="momoSection" style="display: none;">
-            <h2>MoMo Payment Instructions</h2>
-            <p><strong>Send ₵250 per subject</strong> to the MoMo account below:</p>
-            <ul>
-                <li><strong>Account Name:</strong> Your Legit Source</li>
-                <li><strong>MoMo Number:</strong> 0551234567</li>
-                <li><strong>Network:</strong> MTN Ghana</li>
-            </ul>
-
-            <h3>Steps to Pay via MoMo in Ghana:</h3>
-            <ol>
-                <li>Dial <strong>*170#</strong> on your phone.</li>
-                <li>Select option <strong>1 - Transfer Money</strong>.</li>
-                <li>Select <strong>1 - MTN MoMo</strong>.</li>
-                <li>Enter this number: <strong>0551234567</strong>.</li>
-                <li>Enter amount based on number of subjects (₵250 x subjects).</li>
-                <li>Reference: <strong>Use your Index Number</strong>.</li>
-                <li>Confirm with MoMo PIN to complete the payment.</li>
-            </ol>
-
-            <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference during payment.</p>
-
-            <label for="paymentScreenshot">Upload Screenshot of Payment:</label>
-            <input type="file" id="paymentScreenshot" accept="image/*" required>
-        </div>
-    </div>
-
-    <!-- Payment Confirmation -->
-    <div class="confirmation" id="paymentConfirmation" style="display: none;">
-        <div class="confirmation-box">
-            <div class="checkmark">✓</div>
-            <h2>Payment Submitted</h2>
-            <p>We will verify your payment. Your course PDFs will be sent to your email shortly.</p>
-            <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
-        </div>
-    </div>
-
-    <script>
-        // Update total
-        const courses = document.querySelectorAll('.course');
-        const totalPriceEl = document.getElementById('totalPrice');
-        const makePaymentBtn = document.getElementById('makePaymentBtn');
-        const momoSection = document.getElementById('momoSection');
-
-        courses.forEach(course => {
-            course.addEventListener('change', () => {
-                let total = 0;
-                courses.forEach(c => {
-                    if (c.checked) total += parseInt(c.value);
-                });
-                totalPriceEl.textContent = `₵${total}`;
-            });
-        });
-
-        makePaymentBtn.addEventListener('click', () => {
-            momoSection.style.display = 'block';
-        });
-
-        // Example: handle screenshot upload
-        document.getElementById('paymentScreenshot').addEventListener('change', () => {
-            document.getElementById('paymentConfirmation').style.display = 'block';
-        });
-    </script>
-     <script>
-    // Hide splash screen after 3 seconds
-    window.addEventListener('load', function () {
-        const splash = document.getElementById('splashLoader');
-        setTimeout(() => {
-            splash.style.display = 'none';
-        }, 3000); // 3000 milliseconds = 3 seconds
+    document.getElementById("returnToCoursesBtn").addEventListener("click", () => {
+      paymentConfirmation.style.display = "none";
+      momoSection.style.display = "none";
     });
-</script>
-<script>
-  window.addEventListener('load', function () {
-    // Hide splash screen
-    const splash = document.getElementById('splashLoader');
-    splash.style.opacity = 0;
-    setTimeout(() => {
-      splash.style.display = 'none';
-
-      // Show login form
-      const form = document.querySelector('.form-container');
-      if (form) {
-        form.style.display = 'block';
-      }
-    }, 500); // match transition duration
-  });
-</script>
-<script>
-    document.getElementById("registrationForm").addEventListener("submit", function (e) {
-        e.preventDefault(); // Prevent form from reloading page
-
-        // Hide the registration form container
-        document.getElementById("loginForm").style.display = "none";
-
-        // Show the course selection container
-        document.getElementById("courseSelection").style.display = "block";
-    });
-</script>
-
+  </script>
 </body>
 </html>
