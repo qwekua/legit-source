@@ -32,13 +32,15 @@ body {
     height: auto;
 }
 
-.pulse {
-    animation: pulse 1.5s infinite;
-}
+.pulse,
 .pulse1 {
     animation: pulse 1.5s infinite;
 }
-.pulse1 {width: 200px; margin-left: 120px;}
+
+.pulse1 {
+    width: 200px;
+    margin-left: 120px;
+}
 
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -46,7 +48,7 @@ body {
     100% { transform: scale(1); }
 }
 
-/* Form Container */
+/* Form Container and Course Container */
 .form-container, .course-container {
     max-width: 500px;
     margin: 2rem auto;
@@ -130,22 +132,18 @@ body {
     border-top: 1px solid #eee;
     margin-top: 1rem;
 }
- 
-.btn_l{
-    text-decoration: none;
-    color: #fff;
-}
-
-
-
 
 .total-section p {
     font-weight: bold;
     font-size: 18px;
 }
 
+.btn_l {
+    text-decoration: none;
+    color: #fff;
+}
 
-
+/* Payment Info */
 .payment-info {
     background-color: #f9f9f9;
     padding: 15px;
@@ -155,21 +153,6 @@ body {
 
 .payment-info h3 {
     margin-top: 0;
-}
-
-form#paymentProofForm {
-    margin-top: 15px;
-}
-
-form#paymentProofForm .form-group {
-    margin-bottom: 10px;
-}
-
-input[type="file"] {
-    border: 1px solid #ccc;
-    padding: 8px;
-    width: 100%;
-    border-radius: 5px;
 }
 
 /* Payment Confirmation */
@@ -225,19 +208,6 @@ body::before {
     height: 100%;
     z-index: 0;
     pointer-events: none;
-}
-
-/* Responsive Design */
-@media (max-width: 600px) {
-    .form-container, .course-container {
-        margin: 1rem;
-        padding: 1.5rem;
-    }
-    .pulse1 {width: 200px; margin-left: 60px;}
-    
-    .splash-loader img {
-        width: 150px;
-    }
 }
 
 /* Upload Screenshot / Payment Proof */
@@ -322,4 +292,21 @@ body::before {
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .form-container, .course-container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .pulse1 {
+        width: 200px;
+        margin-left: 60px;
+    }
+
+    .splash-loader img {
+        width: 150px;
+    }
 }
