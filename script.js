@@ -134,21 +134,24 @@ function updateTotal() {
     totalPriceElement.textContent = `₵${total}`;
 }
 
-// Handle payment
-function handlePayment() {
-    if (selectedCourses.length === 0) {
-        alert('Please select at least one course');
+document.getElementById('paymentProofForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    const fileInput = document.getElementById('paymentScreenshot');
+    if (fileInput.files.length === 0) {
+        alert('Please upload a screenshot of your MoMo transaction.');
         return;
     }
-    
-    // In a real app, you would process payment here
-    console.log('Selected courses:', selectedCourses);
-    console.log('Total amount:', `₵${selectedCourses.length * coursePrice}`);
-    
-    // // Show payment confirmation
-    // courseSelection.style.display = 'none';
-    // paymentConfirmation.style.display = 'flex';
+
+    // For now, just simulate submission
+    alert('Payment proof submitted. We will verify and email your course PDFs shortly.');
+
+    // Optionally show confirmation screen
+    document.getElementById('courseSelection').style.display = 'none';
+    document.getElementById('paymentConfirmation').style.display = 'block';
+);
 }
+
 
 // Return to courses from confirmation
 function returnToCourses() {
