@@ -58,18 +58,23 @@
         </div>
 
         <!-- Upload Screenshot -->
-        <form id="paymentProofForm" style="display: none;" class="payment-form">
-  <h2>Upload Payment Proof</h2>
-
+<form id="paymentProofForm">
+  <h2>Upload Payment Screenshot</h2>
   <div class="form-group">
-    <label for="paymentScreenshot">Upload Screenshot (PNG/JPEG):</label>
+    <label for="paymentScreenshot">Choose Image File (JPEG or PNG):</label>
     <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/png, image/jpeg" required>
   </div>
-
   <div class="form-group">
     <button type="submit" class="btn">Submit Proof</button>
   </div>
 </form>
+
+<div id="uploadSuccess" class="upload-success-message">
+    <div class="checkmark">✅</div>
+    <h3>Upload Successful!</h3>
+    <p>Your payment screenshot has been received.</p>
+</div>
+
 
     </div>
 </div>
