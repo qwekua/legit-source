@@ -163,5 +163,7 @@ function returnToCourses() {
     totalPriceElement.textContent = '₵0';
 }
 
-// Initialize the app
-init();
+// Wait for DOM to load, then initialize the app
+document.addEventListener("DOMContentLoaded", function () {
+    init();
+});
