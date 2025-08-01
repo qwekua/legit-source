@@ -1,12 +1,19 @@
 <script>
   window.addEventListener("load", function () {
     const splash = document.getElementById("splashLoader");
-    splash.style.opacity = 0;
+
+    // Keep splash fully visible initially
+    setTimeout(() => {
+      splash.style.opacity = 0; // Start fade out
+    }, 3000); // Wait 3 seconds before starting fade
+
+    // Hide after fade out completes
     setTimeout(() => {
       splash.style.display = "none";
       document.querySelector(".form-container").style.display = "block";
-    }, 3500); //3.5seconds
+    }, 3500); // 0.5s fade + 3s wait
   });
+
 
   document.addEventListener("DOMContentLoaded", () => {
     const courseData = [
