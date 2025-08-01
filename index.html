@@ -47,32 +47,41 @@
     </div>
 
     <!-- Mobile Money Payment Section -->
-    <div class="momo-payment-section" id="momoSection" style="display: none;">
-      <h2>MoMo Payment Instructions</h2>
-      <p><strong>Send ₵250 per subject</strong> to the MoMo account below:</p>
-      <ul>
-        <li><strong>Account Name:</strong> FLORENCE OWUSU</li>
-        <li><strong>MoMo Number:</strong> 0209800281</li>
-        <li><strong>Network:</strong> TELECEL Ghana</li>
-      </ul>
+<div class="momo-payment-section" id="momoSection" style="display: none;">
+  <h2>Mobile Money Payment</h2>
 
-      <h3>Steps to Pay via MoMo in Ghana:</h3>
-      <ol>
-        <li>Dial <strong>*170#</strong> on your phone.</li>
-        <li>Select option <strong>1 - Transfer Money</strong>.</li>
-        <li>Select <strong>1 - MTN MoMo</strong>.</li>
-        <li>Enter this number: <strong>0209800281</strong>.</li>
-        <li>Enter amount based on number of subjects (₵250 x subjects).</li>
-        <li>Reference: <strong>Use your Index Number</strong>.</li>
-        <li>Confirm with MoMo PIN to complete the payment.</li>
-      </ol>
-
-      <p><strong>IMPORTANT:</strong> Use your <u>Index Number</u> as the reference during payment.</p>
-
-      <label for="paymentScreenshot">Upload Screenshot of Payment:</label>
-      <input type="file" id="paymentScreenshot" accept="image/*" required />
-    </div>
+  <div class="payment-instructions">
+    <p><strong>Send <span class="amount">₵250</span> per subject</strong> to:</p>
+    <ul>
+      <li><strong>Account Name:</strong> FLORENCE OWUSU</li>
+      <li><strong>MoMo Number:</strong> 0209800281</li>
+      <li><strong>Network:</strong> TELECEL Ghana</li>
+    </ul>
   </div>
+
+  <div class="payment-steps">
+    <h3>How to Pay via MoMo:</h3>
+    <ol>
+      <li>Dial <strong>*170#</strong> on your phone</li>
+      <li>Choose <strong>1 - Transfer Money</strong></li>
+      <li>Select <strong>1 - Telecel Cash</strong></li>
+      <li>Enter number: <strong>0209800281</strong></li>
+      <li>Amount = ₵250 × number of subjects</li>
+      <li>Reference: <strong>Your Index Number</strong></li>
+      <li>Confirm with your MoMo PIN</li>
+    </ol>
+    <p class="important-note">
+      <strong>IMPORTANT:</strong> Use your <u>Index Number</u> as reference.
+    </p>
+  </div>
+
+  <div class="upload-section">
+    <label for="paymentScreenshot">Upload Payment Screenshot:</label>
+    <input type="file" id="paymentScreenshot" accept="image/*" required />
+  </div>
+
+  <button type="submit" class="btn-submit-proof">Submit Proof</button>
+</div>
 
   <!-- Payment Confirmation -->
   <div class="confirmation" id="paymentConfirmation" style="display: none;">
