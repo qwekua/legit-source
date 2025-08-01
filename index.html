@@ -46,7 +46,7 @@
       <button class="btn" id="makePaymentBtn">Make Payment</button>
     </div>
 
-    <!-- Mobile Money Payment Section -->
+<!-- Mobile Money Payment Section -->
 <div class="momo-payment-section" id="momoSection" style="display: none;">
   <h2>Mobile Money Payment</h2>
 
@@ -70,17 +70,20 @@
       <li>Reference: <strong>Your Index Number</strong></li>
       <li>Confirm with your MoMo PIN</li>
     </ol>
-    <p class="important-note">
-      <strong>IMPORTANT:</strong> Use your <u>Index Number</u> as reference.
-    </p>
+    <div class="important-note">
+      <i class="fas fa-exclamation-triangle"></i>
+      Use your <strong>Index Number</strong> as payment reference — <em>very important!</em>
+    </div>
   </div>
 
   <div class="upload-section">
-    <label for="paymentScreenshot">Upload Payment Screenshot:</label>
+    <label for="paymentScreenshot" class="upload-label">Upload Payment Screenshot</label>
     <input type="file" id="paymentScreenshot" accept="image/*" required />
   </div>
 
-  <button type="submit" class="btn-submit-proof">Submit Proof</button>
+  <button type="submit" class="btn-submit-proof">
+    <i class="fas fa-paper-plane"></i> Submit Proof
+  </button>
 </div>
 
   <!-- Payment Confirmation -->
