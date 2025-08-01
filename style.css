@@ -70,6 +70,12 @@ body {
     margin-bottom: 1.5rem;
     color: #333;
 }
+.wassce-logo {
+    display: block;
+    margin: 0 auto 20px auto; /* top: 0, left/right: auto center, bottom: 20px spacing */
+    width: 120px; /* or adjust size */
+    height: auto;
+}
 
 /* Form Elements */
 .form-group {
