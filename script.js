@@ -2,7 +2,7 @@
   window.addEventListener("load", function () {
     const splash = document.getElementById("splashLoader");
     splash.style.opacity = 0;
-    setTimeout(() => {
+    setTimeout((3) => {
       splash.style.display = "none";
       document.querySelector(".form-container").style.display = "block";
     }, 500);
