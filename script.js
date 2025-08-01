@@ -2,10 +2,10 @@
   window.addEventListener("load", function () {
     const splash = document.getElementById("splashLoader");
     splash.style.opacity = 0;
-    setTimeout((3) => {
+    setTimeout(() => {
       splash.style.display = "none";
       document.querySelector(".form-container").style.display = "block";
-    }, 500);
+    }, 3500); //3.5seconds
   });
 
   document.addEventListener("DOMContentLoaded", () => {
