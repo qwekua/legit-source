@@ -10,8 +10,8 @@
       setTimeout(() => {
         splash.style.display = "none";
         document.querySelector(".form-container").style.display = "block";
-      }, 500); // Fade duration
-    }, 3000); // Initial delay (3 seconds)
+      }, 1500); // Fade duration
+    }, 5000); // Initial delay (3 seconds)
   });
 
   document.addEventListener("DOMContentLoaded", () => {
