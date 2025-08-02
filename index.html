@@ -9,16 +9,15 @@
 <body>
     <!-- Splash Loader -->
     <div class="splash-loader" id="splashLoader">
-        <img src="wassce logo.png" alt="wassce Logo" class="pulse">
+        <img src="wassce logo.png" alt="WASSCE Logo" class="pulse">
     </div>
 
     <!-- Login/Registration Form -->
     <div class="form-container" id="loginForm">
-          <img src="wassce logo.png" alt="wassce Logo" class="pulse1">
+        <div class="form-logo">
+            <img src="wassce logo.png" alt="WASSCE Logo" class="form-logo-img">
+        </div>
         <h1>Your Legit Source</h1>
-         <strong>Note: Keep this to yourself; no sharing of PDFs to others 
-        If you do so; you do it at your own risk
-        all pdfs will be shared into your email provided shortly after payment Confirmation</strong>
         <h2>Create Account</h2>
         <form id="registrationForm">
             <div class="form-group">
@@ -42,21 +41,65 @@
 
     <!-- Course Selection -->
     <div class="course-container" id="courseSelection">
-        <h1>Select Your Courses (₵500 each)</h1>
-        <div class="course-list" id="courseList"></div>
+        <h1>Select Your Courses (₵250 each)</h1>
+        <div class="course-list" id="courseList">
+            <!-- Example subjects -->
+            <label><input type="checkbox" class="course" value="250"> Core Mathematics</label><br>
+            <label><input type="checkbox" class="course" value="250"> English Language</label><br>
+            <label><input type="checkbox" class="course" value="250"> Integrated Science</label><br>
+            <label><input type="checkbox" class="course" value="250"> Social Studies</label><br>
+        </div>
+
         <div class="total-section">
             <p>Total: <span id="totalPrice">₵0</span></p>
-            <button class="btn" id="makePaymentBtn"><a href="https://eversend.me/qweku" class="btn_l">Make Payment with Eversend</a></button>
+            <button class="btn" id="makePaymentBtn">Make Payment</button>
+        </div>
+
+        <!-- Mobile Money Payment Section -->
+        <div class="momo-payment-section" id="momoSection" style="display: none;">
+            <h2>📱 MoMo Payment Instructions</h2>
+            <p>Send <strong>₵250 per subject</strong> to the MoMo account below:</p>
+            
+            <ul>
+                <li><strong>Account Name:</strong> Your Legit Source</li>
+                <li><strong>MoMo Number:</strong> 0551234567</li>
+                <li><strong>Network:</strong> MTN Ghana 📶</li>
+            </ul>
+
+            <h3>📋 Step-by-Step Payment Guide:</h3>
+            <ol>
+                <li>Dial <strong>*170#</strong> on your MTN phone</li>
+                <li>Select option <strong>1 - Transfer Money</strong></li>
+                <li>Select <strong>1 - MTN MoMo</strong></li>
+                <li>Enter recipient number: <strong>0551234567</strong></li>
+                <li>Enter total amount: <strong>₵<span id="paymentAmount">250</span></strong></li>
+                <li>Reference: <strong>Enter your Index Number</strong></li>
+                <li>Enter your MoMo PIN to complete payment</li>
+            </ol>
+
+            <div class="important-note">
+                <p><strong>⚠️ IMPORTANT:</strong> Always use your <u>Index Number</u> as the payment reference!</p>
+            </div>
+
+            <label for="paymentScreenshot">📸 Upload Payment Screenshot:</label>
+            <input type="file" id="paymentScreenshot" accept="image/jpeg,image/jpg,image/png,image/gif" required>
+            
+            <div class="upload-instructions">
+                <p><small>💡 Take a clear screenshot of your successful payment confirmation and upload it above.</small></p>
+            </div>
+            
+            <button type="button" class="btn upload-btn" id="uploadBtn" disabled>
+                📤 Submit Payment Proof
+            </button>
         </div>
     </div>
-    
 
     <!-- Payment Confirmation -->
-    <div class="confirmation" id="paymentConfirmation">
+    <div class="confirmation" id="paymentConfirmation" style="display: none;">
         <div class="confirmation-box">
             <div class="checkmark">✓</div>
-            <h2>Payment Successful</h2>
-            <p>Your selected course PDFs will be sent to your email shortly.</p>
+            <h2>Payment Submitted</h2>
+            <p>We will verify your payment. Your course PDFs will be sent to your email shortly.</p>
             <button class="btn" id="returnToCoursesBtn">Return to Courses</button>
         </div>
     </div>

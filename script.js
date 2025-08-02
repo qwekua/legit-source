@@ -44,7 +44,7 @@ const returnToCoursesBtn = document.getElementById('returnToCoursesBtn');
 
 // Variables
 let selectedCourses = [];
-const coursePrice = 500;
+const coursePrice = 250;
 
 // Initialize the page
 function init() {
@@ -69,6 +69,18 @@ function init() {
     registrationForm.addEventListener('submit', handleRegistration);
     makePaymentBtn.addEventListener('click', handlePayment);
     returnToCoursesBtn.addEventListener('click', returnToCourses);
+    
+    // Payment screenshot upload handler
+    const paymentScreenshot = document.getElementById('paymentScreenshot');
+    const uploadBtn = document.getElementById('uploadBtn');
+    
+    if (paymentScreenshot) {
+        paymentScreenshot.addEventListener('change', handleFileSelection);
+    }
+    
+    if (uploadBtn) {
+        uploadBtn.addEventListener('click', handleScreenshotUpload);
+    }
 }
 
 // Show login form
@@ -132,6 +144,12 @@ function updateTotal() {
     
     const total = selectedCourses.length * coursePrice;
     totalPriceElement.textContent = `₵${total}`;
+    
+    // Update payment amount in MoMo section
+    const paymentAmountElement = document.getElementById('paymentAmount');
+    if (paymentAmountElement) {
+        paymentAmountElement.textContent = total;
+    }
 }
 
 // Handle payment
@@ -141,13 +159,15 @@ function handlePayment() {
         return;
     }
     
-    // In a real app, you would process payment here
+    // Show MoMo payment section
+    const momoSection = document.getElementById('momoSection');
+    momoSection.style.display = 'block';
+    
+    // Scroll to payment section
+    momoSection.scrollIntoView({ behavior: 'smooth' });
+    
     console.log('Selected courses:', selectedCourses);
     console.log('Total amount:', `₵${selectedCourses.length * coursePrice}`);
-    
-    // // Show payment confirmation
-    // courseSelection.style.display = 'none';
-    // paymentConfirmation.style.display = 'flex';
 }
 
 // Return to courses from confirmation
@@ -163,7 +183,99 @@ function returnToCourses() {
     totalPriceElement.textContent = '₵0';
 }
 
-// Wait for DOM to load, then initialize the app
-document.addEventListener("DOMContentLoaded", function () {
-    init();
-});
+// Handle file selection (enable/disable upload button)
+function handleFileSelection(e) {
+    const file = e.target.files[0];
+    const uploadBtn = document.getElementById('uploadBtn');
+    
+    if (file) {
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+            showMessage('Please upload a valid image file (JPEG, PNG, or GIF)', 'error');
+            e.target.value = '';
+            uploadBtn.disabled = true;
+            return;
+        }
+        
+        // Validate file size (max 5MB)
+        const maxSize = 5 * 1024 * 1024; // 5MB in bytes
+        if (file.size > maxSize) {
+            showMessage('File size must be less than 5MB', 'error');
+            e.target.value = '';
+            uploadBtn.disabled = true;
+            return;
+        }
+        
+        // Enable upload button if file is valid
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = '📤 Submit Payment Proof';
+        
+        // Remove any existing error messages
+        const existingMessages = document.querySelectorAll('.error-message');
+        existingMessages.forEach(msg => msg.remove());
+        
+    } else {
+        uploadBtn.disabled = true;
+    }
+}
+
+// Handle screenshot upload
+function handleScreenshotUpload() {
+    const paymentScreenshot = document.getElementById('paymentScreenshot');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const file = paymentScreenshot.files[0];
+    
+    if (!file) {
+        showMessage('Please select a file first', 'error');
+        return;
+    }
+    
+    // Show loading state
+    uploadBtn.disabled = true;
+    uploadBtn.textContent = '⏳ Uploading...';
+    paymentScreenshot.classList.add('file-uploading');
+    
+    // Simulate upload process
+    setTimeout(() => {
+        paymentScreenshot.classList.remove('file-uploading');
+        uploadBtn.textContent = '✅ Uploaded Successfully';
+        uploadBtn.style.backgroundColor = '#4caf50';
+        
+        showMessage('Payment screenshot uploaded successfully! We will verify your payment shortly.', 'success');
+        
+        // Show confirmation after a delay
+        setTimeout(() => {
+            courseSelection.style.display = 'none';
+            paymentConfirmation.style.display = 'flex';
+        }, 2000);
+    }, 1500);
+}
+
+// Show success/error messages
+function showMessage(message, type) {
+    // Remove existing messages
+    const existingMessages = document.querySelectorAll('.error-message, .success-message');
+    existingMessages.forEach(msg => msg.remove());
+    
+    // Create new message element
+    const messageDiv = document.createElement('div');
+    messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+    messageDiv.textContent = message;
+    
+    // Insert message before MoMo section
+    const momoSection = document.getElementById('momoSection');
+    momoSection.parentNode.insertBefore(messageDiv, momoSection);
+    
+    // Auto-remove success messages after 5 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 5000);
+    }
+}
+
+// Initialize the app
+init();
