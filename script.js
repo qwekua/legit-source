@@ -97,7 +97,6 @@ function handleRegistration(e) {
     const indexNumber = document.getElementById('indexNumber').value;
     const phoneNumber = document.getElementById('phoneNumber').value;
     const email = document.getElementById('email').value;
-
     const password = document.getElementById('password').value;
     
     // In a real app, you would validate and send to server here
@@ -131,7 +130,6 @@ function populateCourseList() {
         courseList.appendChild(courseItem);
     });
 }
-
 
 // Update total price
 function updateTotal() {
